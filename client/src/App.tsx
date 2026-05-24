@@ -1,6 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { useAuth } from "./_core/hooks/useAuth";
@@ -17,7 +17,6 @@ import NotFound from "./pages/NotFound";
 
 function ProtectedRoute({ children, requiredRole }: { children: React.ReactNode; requiredRole?: string }) {
   const { user, loading } = useAuth();
-  const [, navigate] = useLocation();
 
   if (loading) {
     return (
@@ -28,12 +27,12 @@ function ProtectedRoute({ children, requiredRole }: { children: React.ReactNode;
   }
 
   if (!user) {
-    navigate("/login");
+    window.location.href = "/login";
     return null;
   }
 
   if (requiredRole && user.role !== requiredRole) {
-    navigate("/login");
+    window.location.href = "/login";
     return null;
   }
 
@@ -42,9 +41,8 @@ function ProtectedRoute({ children, requiredRole }: { children: React.ReactNode;
 
 function Router() {
   const { user, loading } = useAuth();
-  const [location] = useLocation();
 
-  if (loading && location !== "/login") {
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
         <Spinner />
