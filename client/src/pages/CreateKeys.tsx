@@ -16,11 +16,16 @@ export default function CreateKeys() {
   const [generatedKeys, setGeneratedKeys] = useState<string[]>([]);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
 
+  const utils = trpc.useUtils();
+
   const createKeysMutation = trpc.key.create.useMutation({
     onSuccess: (data) => {
       setGeneratedKeys(data.keys);
       setShowModal(true);
       toast.success(`${data.keys.length} keys criadas com sucesso!`);
+      // Refetch stats and keys list
+      utils.key.getDashboardStats.invalidate();
+      utils.key.list.invalidate();
     },
     onError: (error) => {
       toast.error(error.message || "Erro ao criar keys");
