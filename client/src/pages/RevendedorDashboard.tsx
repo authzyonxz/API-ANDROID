@@ -1,99 +1,138 @@
-import Sidebar from "@/components/Sidebar";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
 import { Key, Zap, TrendingUp } from "lucide-react";
+import Sidebar from "@/components/Sidebar";
 
 export default function RevendedorDashboard() {
   const { data: stats, isLoading } = trpc.key.getDashboardStats.useQuery();
 
+  const handleNavigate = (path: string) => {
+    window.location.href = path;
+  };
+
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-slate-950">
       <Sidebar currentPage="Dashboard" />
 
       <main className="flex-1 overflow-auto">
-        <div className="p-8">
+        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-950 p-8">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-4xl font-bold text-gray-900">Meu Dashboard</h1>
-            <p className="text-gray-600 mt-2">
+          <div className="mb-12">
+            <h1 className="text-5xl font-black text-white mb-2">Meu Dashboard</h1>
+            <p className="text-slate-400 text-lg">
               Acompanhe suas keys e créditos disponíveis
             </p>
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             {/* Total Keys */}
-            <Card className="p-6 border-l-4 border-l-red-600">
-              <div className="flex items-center justify-between">
+            <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:border-red-500/50">
+              <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-gray-600 text-sm font-medium">Minhas Keys</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-2">
+                  <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider">Minhas Keys</p>
+                  <p className="text-4xl font-black text-white mt-4">
                     {isLoading ? "-" : stats?.totalKeys || 0}
                   </p>
                 </div>
-                <Key className="text-red-600" size={40} />
+                <div className="p-3 bg-gradient-to-br from-red-600/20 to-red-700/20 rounded-xl">
+                  <Key className="text-red-500" size={32} />
+                </div>
               </div>
             </Card>
 
             {/* Active Keys */}
-            <Card className="p-6 border-l-4 border-l-green-600">
-              <div className="flex items-center justify-between">
+            <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:border-green-500/50">
+              <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-gray-600 text-sm font-medium">Keys Ativas</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-2">
+                  <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider">Keys Ativas</p>
+                  <p className="text-4xl font-black text-white mt-4">
                     {isLoading ? "-" : stats?.activeKeys || 0}
                   </p>
                 </div>
-                <TrendingUp className="text-green-600" size={40} />
+                <div className="p-3 bg-gradient-to-br from-green-600/20 to-green-700/20 rounded-xl">
+                  <TrendingUp className="text-green-500" size={32} />
+                </div>
               </div>
             </Card>
 
             {/* Available Credits */}
-            <Card className="p-6 border-l-4 border-l-yellow-600">
-              <div className="flex items-center justify-between">
+            <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:border-yellow-500/50">
+              <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-gray-600 text-sm font-medium">Créditos Disponíveis</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-2">
+                  <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider">Créditos</p>
+                  <p className="text-4xl font-black text-white mt-4">
                     {isLoading ? "-" : stats?.creditBalance || 0}
                   </p>
                 </div>
-                <Zap className="text-yellow-600" size={40} />
+                <div className="p-3 bg-gradient-to-br from-yellow-600/20 to-yellow-700/20 rounded-xl">
+                  <Zap className="text-yellow-500" size={32} />
+                </div>
               </div>
             </Card>
+          </div>
+
+          {/* Quick Actions */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <Button
+              onClick={() => handleNavigate("/revendedor/create-keys")}
+              className="h-16 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-lg rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            >
+              <Key className="mr-3" size={24} />
+              Criar Keys
+            </Button>
+            <Button
+              onClick={() => handleNavigate("/revendedor/manage-keys")}
+              className="h-16 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-lg rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+            >
+              <Key className="mr-3" size={24} />
+              Minhas Keys
+            </Button>
           </div>
 
           {/* Info Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Pricing Info */}
-            <Card className="p-6 bg-blue-50 border-blue-200">
-              <h2 className="text-lg font-bold text-blue-900 mb-4">Tabela de Preços</h2>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-blue-800">1 Dia</span>
-                  <span className="font-bold text-blue-900">1 Crédito</span>
+            <Card className="bg-gradient-to-br from-purple-600/20 to-blue-600/20 border border-purple-500/30 p-8 rounded-2xl backdrop-blur-sm">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent mb-6">
+                Tabela de Preços
+              </h2>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
+                  <span className="text-slate-300 font-medium">1 Dia</span>
+                  <span className="font-bold text-purple-400">1 Crédito</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-blue-800">7 Dias</span>
-                  <span className="font-bold text-blue-900">5 Créditos</span>
+                <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
+                  <span className="text-slate-300 font-medium">7 Dias</span>
+                  <span className="font-bold text-purple-400">5 Créditos</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-blue-800">30 Dias</span>
-                  <span className="font-bold text-blue-900">15 Créditos</span>
+                <div className="flex justify-between items-center p-3 bg-slate-900/50 rounded-lg">
+                  <span className="text-slate-300 font-medium">30 Dias</span>
+                  <span className="font-bold text-purple-400">20 Créditos</span>
                 </div>
               </div>
             </Card>
 
-            {/* Quick Actions */}
-            <Card className="p-6 bg-red-50 border-red-200">
-              <h2 className="text-lg font-bold text-red-900 mb-4">Ações Rápidas</h2>
-              <p className="text-red-800 text-sm mb-4">
-                Use o menu lateral para:
-              </p>
-              <ul className="space-y-2 text-red-800 text-sm">
-                <li>✓ Criar novas keys</li>
-                <li>✓ Gerenciar suas keys</li>
-                <li>✓ Acompanhar créditos</li>
-              </ul>
+            {/* Help Info */}
+            <Card className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-blue-500/30 p-8 rounded-2xl backdrop-blur-sm">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-6">
+                Como Funciona
+              </h2>
+              <div className="space-y-3 text-slate-300">
+                <p className="flex items-start gap-3">
+                  <span className="text-purple-400 font-bold mt-0.5">1.</span>
+                  <span>Crie suas keys com o plano desejado</span>
+                </p>
+                <p className="flex items-start gap-3">
+                  <span className="text-purple-400 font-bold mt-0.5">2.</span>
+                  <span>Cada key custará créditos conforme o plano</span>
+                </p>
+                <p className="flex items-start gap-3">
+                  <span className="text-purple-400 font-bold mt-0.5">3.</span>
+                  <span>Gerencie suas keys ativas a qualquer momento</span>
+                </p>
+              </div>
             </Card>
           </div>
         </div>
