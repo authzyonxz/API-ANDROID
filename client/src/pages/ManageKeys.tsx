@@ -174,7 +174,7 @@ export default function ManageKeys() {
                 Nenhuma key encontrada. Crie uma nova key para começar.
               </p>
             </Card>
-          )
+          )}
         </div>
       </main>
     </div>

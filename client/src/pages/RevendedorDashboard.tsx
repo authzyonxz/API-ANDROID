@@ -37,7 +37,7 @@ export default function RevendedorDashboard() {
                   </p>
                 </div>
                 <div className="p-2 md:p-3 bg-gradient-to-br from-red-600/20 to-red-700/20 rounded-lg md:rounded-xl">
-                  <Key className="text-red-500" size={24} className="md:size-8" />
+                  <Key className="text-red-500 md:size-8" size={24} />
                 </div>
               </div>
             </Card>
@@ -52,7 +52,7 @@ export default function RevendedorDashboard() {
                   </p>
                 </div>
                 <div className="p-2 md:p-3 bg-gradient-to-br from-green-600/20 to-green-700/20 rounded-lg md:rounded-xl">
-                  <TrendingUp className="text-green-500" size={24} className="md:size-8" />
+                  <TrendingUp className="text-green-500 md:size-8" size={24} />
                 </div>
               </div>
             </Card>
@@ -67,7 +67,7 @@ export default function RevendedorDashboard() {
                   </p>
                 </div>
                 <div className="p-2 md:p-3 bg-gradient-to-br from-yellow-600/20 to-yellow-700/20 rounded-lg md:rounded-xl">
-                  <Zap className="text-yellow-500" size={24} className="md:size-8" />
+                  <Zap className="text-yellow-500 md:size-8" size={24} />
                 </div>
               </div>
             </Card>
@@ -79,14 +79,14 @@ export default function RevendedorDashboard() {
               onClick={() => handleNavigate("/revendedor/create-keys")}
               className="h-10 md:h-16 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-sm md:text-lg rounded-lg md:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
             >
-              <Key className="mr-2 md:mr-3" size={18} className="md:size-6" />
+              <Key className="mr-2 md:mr-3 md:size-6" size={18} />
               Criar Keys
             </Button>
             <Button
               onClick={() => handleNavigate("/revendedor/manage-keys")}
               className="h-10 md:h-16 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-sm md:text-lg rounded-lg md:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
             >
-              <Key className="mr-2 md:mr-3" size={18} className="md:size-6" />
+              <Key className="mr-2 md:mr-3 md:size-6" size={18} />
               Minhas Keys
             </Button>
           </div>
