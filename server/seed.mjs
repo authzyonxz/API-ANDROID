@@ -1,5 +1,6 @@
 import { drizzle } from "drizzle-orm/mysql2";
 import { users, revendedores } from "../drizzle/schema.ts";
+import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 
 const db = drizzle(process.env.DATABASE_URL);
@@ -7,7 +8,7 @@ const db = drizzle(process.env.DATABASE_URL);
 async function seed() {
   try {
     // Check if admin already exists
-    const existingAdmin = await db.select().from(users).where({ username: "ADMINISTRADOR" }).limit(1);
+    const existingAdmin = await db.select().from(users).where(eq(users.username, "ADMINISTRADOR")).limit(1);
     
     if (existingAdmin.length > 0) {
       console.log("Admin user already exists");
