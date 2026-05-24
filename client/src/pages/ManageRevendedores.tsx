@@ -74,67 +74,67 @@ export default function ManageRevendedores() {
       <Sidebar currentPage="Revendedores" />
 
       <main className="flex-1 overflow-auto">
-        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-950 p-8 md:p-12">
+        <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-950 p-4 md:p-8 lg:p-12">
           {/* Header */}
-          <div className="mb-16 flex items-center justify-between flex-wrap gap-6">
+          <div className="mb-8 md:mb-16 flex items-center justify-between flex-wrap gap-4 md:gap-6">
             <div>
-              <h1 className="text-5xl font-black text-white mb-4">Gerenciar Revendedores</h1>
-              <p className="text-slate-400 text-lg">
+              <h1 className="text-3xl md:text-5xl font-black text-white mb-2 md:mb-4">Gerenciar Revendedores</h1>
+              <p className="text-slate-400 text-sm md:text-lg">
                 Crie e gerencie revendedores do sistema
               </p>
             </div>
             <Button
               onClick={() => setShowCreateModal(true)}
-              className="h-14 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-2xl transition-all"
+              className="h-9 md:h-14 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-xs md:text-lg rounded-lg md:rounded-xl shadow-lg hover:shadow-2xl transition-all whitespace-nowrap"
             >
-              <Plus size={24} className="mr-2" />
+              <Plus size={16} className="md:size-6 mr-1 md:mr-2" />
               Novo Revendedor
             </Button>
           </div>
 
           {/* Revendedores List */}
           {isLoading ? (
-            <div className="p-12 text-center text-slate-400">
-              <p className="text-lg">Carregando revendedores...</p>
+            <div className="p-8 md:p-12 text-center text-slate-400">
+              <p className="text-sm md:text-lg">Carregando revendedores...</p>
             </div>
           ) : revendedores && revendedores.length > 0 ? (
-            <div className="space-y-6">
+            <div className="space-y-4 md:space-y-6">
               {revendedores.map((revendedor) => (
                 <Card
                   key={revendedor.id}
-                  className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:border-purple-500/50"
+                  className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 p-4 md:p-8 rounded-lg md:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:border-purple-500/50"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 items-center">
                     {/* Info */}
-                    <div className="space-y-4">
+                    <div className="space-y-3 md:space-y-4">
                       <div>
-                        <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-2">ID</p>
-                        <p className="text-white text-2xl font-black">#{revendedor.id}</p>
+                        <p className="text-slate-400 text-xs md:text-sm font-semibold uppercase tracking-wider mb-2">ID</p>
+                        <p className="text-white text-xl md:text-2xl font-black">#{revendedor.id}</p>
                       </div>
                       <div>
-                        <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-2">Usuário</p>
-                        <p className="text-white text-lg font-bold">{revendedor.username}</p>
+                        <p className="text-slate-400 text-xs md:text-sm font-semibold uppercase tracking-wider mb-2">Usuário</p>
+                        <p className="text-white text-base md:text-lg font-bold">{revendedor.username}</p>
                       </div>
                     </div>
 
                     {/* Credits */}
-                    <div className="bg-gradient-to-br from-yellow-600/20 to-yellow-700/20 border border-yellow-500/30 p-6 rounded-xl">
-                      <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-3">Créditos Disponíveis</p>
-                      <p className="text-4xl font-black bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
+                    <div className="bg-gradient-to-br from-yellow-600/20 to-yellow-700/20 border border-yellow-500/30 p-4 md:p-6 rounded-lg md:rounded-xl">
+                      <p className="text-slate-400 text-xs md:text-sm font-semibold uppercase tracking-wider mb-2 md:mb-3">Créditos Disponíveis</p>
+                      <p className="text-2xl md:text-4xl font-black bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
                         {parseFloat(revendedor.creditBalance.toString()).toFixed(2)}
                       </p>
                     </div>
 
                     {/* Actions */}
-                    <div className="space-y-3">
+                    <div className="space-y-2 md:space-y-3">
                       <Button
                         onClick={() => {
                           setSelectedRevendedor(revendedor);
                           setShowAddCreditModal(true);
                         }}
-                        className="w-full h-12 bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 text-white font-bold rounded-lg transition-all"
+                        className="w-full h-9 md:h-12 bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 text-white font-bold text-xs md:text-base rounded-lg transition-all"
                       >
-                        <Zap size={18} className="mr-2" />
+                        <Zap size={14} className="md:size-5 mr-1 md:mr-2" />
                         Adicionar Créditos
                       </Button>
                       <p className="text-xs text-slate-400 text-center">
@@ -146,8 +146,8 @@ export default function ManageRevendedores() {
               ))}
             </div>
           ) : (
-            <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 p-12 rounded-2xl text-center">
-              <p className="text-slate-400 text-lg">
+            <Card className="bg-gradient-to-br from-slate-900 to-slate-800 border border-slate-700 p-6 md:p-12 rounded-lg md:rounded-2xl text-center">
+              <p className="text-slate-400 text-sm md:text-lg">
                 Nenhum revendedor encontrado. Crie um novo revendedor para começar.
               </p>
             </Card>
@@ -157,14 +157,14 @@ export default function ManageRevendedores() {
 
       {/* Create Revendedor Modal */}
       <Dialog open={showCreateModal} onOpenChange={setShowCreateModal}>
-        <DialogContent className="bg-slate-900 border-slate-700 rounded-2xl p-0">
-          <DialogHeader className="p-8 border-b border-slate-700">
-            <DialogTitle className="text-2xl font-black text-white">Criar Novo Revendedor</DialogTitle>
+        <DialogContent className="bg-slate-900 border-slate-700 rounded-lg md:rounded-2xl p-0">
+          <DialogHeader className="p-4 md:p-8 border-b border-slate-700">
+            <DialogTitle className="text-lg md:text-2xl font-black text-white">Criar Novo Revendedor</DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-6 p-8">
-            <div className="space-y-3">
-              <label className="block text-lg font-bold text-white">
+          <div className="space-y-4 md:space-y-6 p-4 md:p-8">
+            <div className="space-y-2 md:space-y-3">
+              <label className="block text-base md:text-lg font-bold text-white">
                 Usuário
               </label>
               <Input
@@ -172,12 +172,12 @@ export default function ManageRevendedores() {
                 placeholder="Digite o usuário"
                 value={formData.username}
                 onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                className="h-12 bg-slate-800 border-slate-700 text-white rounded-lg text-base"
+                className="h-10 md:h-12 bg-slate-800 border-slate-700 text-white rounded-lg text-sm md:text-base"
               />
             </div>
 
-            <div className="space-y-3">
-              <label className="block text-lg font-bold text-white">
+            <div className="space-y-2 md:space-y-3">
+              <label className="block text-base md:text-lg font-bold text-white">
                 Senha
               </label>
               <Input
@@ -185,12 +185,12 @@ export default function ManageRevendedores() {
                 placeholder="Digite a senha"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="h-12 bg-slate-800 border-slate-700 text-white rounded-lg text-base"
+                className="h-10 md:h-12 bg-slate-800 border-slate-700 text-white rounded-lg text-sm md:text-base"
               />
             </div>
 
-            <div className="space-y-3">
-              <label className="block text-lg font-bold text-white">
+            <div className="space-y-2 md:space-y-3">
+              <label className="block text-base md:text-lg font-bold text-white">
                 Créditos Iniciais
               </label>
               <Input
@@ -200,21 +200,21 @@ export default function ManageRevendedores() {
                 onChange={(e) =>
                   setFormData({ ...formData, creditBalance: parseInt(e.target.value) || 0 })
                 }
-                className="h-12 bg-slate-800 border-slate-700 text-white rounded-lg text-base"
+                className="h-10 md:h-12 bg-slate-800 border-slate-700 text-white rounded-lg text-sm md:text-base"
               />
             </div>
 
-            <div className="flex flex-col md:flex-row gap-4 pt-6 border-t border-slate-700">
+            <div className="flex flex-col md:flex-row gap-3 md:gap-4 pt-4 md:pt-6 border-t border-slate-700">
               <Button
                 onClick={() => setShowCreateModal(false)}
-                className="flex-1 h-12 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg"
+                className="flex-1 h-10 md:h-12 bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm md:text-base rounded-lg"
               >
                 Cancelar
               </Button>
               <Button
                 onClick={handleCreateRevendedor}
                 disabled={createRevendedorMutation.isPending}
-                className="flex-1 h-12 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold rounded-lg"
+                className="flex-1 h-10 md:h-12 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold text-sm md:text-base rounded-lg"
               >
                 {createRevendedorMutation.isPending ? "Criando..." : "Criar"}
               </Button>
@@ -225,17 +225,17 @@ export default function ManageRevendedores() {
 
       {/* Add Credit Modal */}
       <Dialog open={showAddCreditModal} onOpenChange={setShowAddCreditModal}>
-        <DialogContent className="bg-slate-900 border-slate-700 rounded-2xl p-0">
-          <DialogHeader className="p-8 border-b border-slate-700">
-            <DialogTitle className="text-2xl font-black text-white">Adicionar Créditos</DialogTitle>
+        <DialogContent className="bg-slate-900 border-slate-700 rounded-lg md:rounded-2xl p-0">
+          <DialogHeader className="p-4 md:p-8 border-b border-slate-700">
+            <DialogTitle className="text-lg md:text-2xl font-black text-white">Adicionar Créditos</DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-6 p-8">
-            <div className="bg-gradient-to-br from-purple-600/20 to-blue-600/20 border border-purple-500/30 p-6 rounded-xl">
-              <p className="text-slate-400 text-sm font-semibold uppercase tracking-wider mb-2">
+          <div className="space-y-4 md:space-y-6 p-4 md:p-8">
+            <div className="bg-gradient-to-br from-purple-600/20 to-blue-600/20 border border-purple-500/30 p-3 md:p-6 rounded-lg md:rounded-xl">
+              <p className="text-slate-400 text-xs md:text-sm font-semibold uppercase tracking-wider mb-2">
                 Revendedor: #{selectedRevendedor?.id}
               </p>
-              <p className="text-white text-lg">
+              <p className="text-white text-sm md:text-lg">
                 Créditos atuais:{" "}
                 <span className="font-black bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                   {parseFloat(selectedRevendedor?.creditBalance.toString() || "0").toFixed(2)}
@@ -243,8 +243,8 @@ export default function ManageRevendedores() {
               </p>
             </div>
 
-            <div className="space-y-3">
-              <label className="block text-lg font-bold text-white">
+            <div className="space-y-2 md:space-y-3">
+              <label className="block text-base md:text-lg font-bold text-white">
                 Quantidade de Créditos
               </label>
               <Input
@@ -252,21 +252,21 @@ export default function ManageRevendedores() {
                 placeholder="0"
                 value={creditAmount}
                 onChange={(e) => setCreditAmount(parseInt(e.target.value) || 0)}
-                className="h-12 bg-slate-800 border-slate-700 text-white rounded-lg text-base"
+                className="h-10 md:h-12 bg-slate-800 border-slate-700 text-white rounded-lg text-sm md:text-base"
               />
             </div>
 
-            <div className="flex flex-col md:flex-row gap-4 pt-6 border-t border-slate-700">
+            <div className="flex flex-col md:flex-row gap-3 md:gap-4 pt-4 md:pt-6 border-t border-slate-700">
               <Button
                 onClick={() => setShowAddCreditModal(false)}
-                className="flex-1 h-12 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg"
+                className="flex-1 h-10 md:h-12 bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm md:text-base rounded-lg"
               >
                 Cancelar
               </Button>
               <Button
                 onClick={handleAddCredit}
                 disabled={addCreditMutation.isPending}
-                className="flex-1 h-12 bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 text-white font-bold rounded-lg"
+                className="flex-1 h-10 md:h-12 bg-gradient-to-r from-yellow-600 to-yellow-700 hover:from-yellow-700 hover:to-yellow-800 text-white font-bold text-sm md:text-base rounded-lg"
               >
                 {addCreditMutation.isPending ? "Adicionando..." : "Adicionar"}
               </Button>

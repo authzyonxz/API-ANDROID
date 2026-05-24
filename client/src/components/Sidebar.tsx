@@ -42,14 +42,14 @@ export default function Sidebar({ currentPage }: SidebarProps) {
       ];
 
   return (
-    <aside className="w-64 bg-gradient-to-b from-slate-950 to-slate-900 text-white h-screen flex flex-col shadow-2xl border-r border-slate-800">
+    <aside className="hidden md:flex w-64 bg-gradient-to-b from-slate-950 to-slate-900 text-white h-screen flex-col shadow-2xl border-r border-slate-800">
       {/* Logo */}
-      <div className="p-6 border-b border-slate-800">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
-            <span className="text-lg">🛡️</span>
+      <div className="p-4 md:p-6 border-b border-slate-800">
+        <div className="flex items-center gap-2 md:gap-3 mb-3">
+          <div className="w-8 md:w-10 h-8 md:h-10 bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+            <span className="text-sm md:text-lg">🛡️</span>
           </div>
-          <h1 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+          <h1 className="text-base md:text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             AUTHPROXY
           </h1>
         </div>
@@ -57,13 +57,13 @@ export default function Sidebar({ currentPage }: SidebarProps) {
       </div>
 
       {/* User Info */}
-      <div className="p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border-b border-slate-800">
+      <div className="p-3 md:p-4 bg-gradient-to-r from-purple-600/20 to-blue-600/20 border-b border-slate-800">
         <p className="text-xs text-slate-400 uppercase tracking-wider mb-1">Logado como</p>
-        <p className="font-semibold text-white truncate text-sm">{user?.username}</p>
+        <p className="font-semibold text-white truncate text-xs md:text-sm">{user?.username}</p>
       </div>
 
       {/* Navigation Menu */}
-      <nav className="flex-1 p-3 space-y-2 overflow-y-auto">
+      <nav className="flex-1 p-2 md:p-3 space-y-1 md:space-y-2 overflow-y-auto">
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isActive = currentPage === item.label;
@@ -71,26 +71,26 @@ export default function Sidebar({ currentPage }: SidebarProps) {
             <button
               key={item.path}
               onClick={() => handleNavigation(item.path)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+              className={`w-full flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl transition-all duration-200 ${
                 isActive
                   ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-lg shadow-purple-600/50"
                   : "text-slate-300 hover:bg-slate-800 hover:text-white"
               }`}
             >
-              <Icon size={20} />
-              <span className="text-sm">{item.label}</span>
+              <Icon size={18} className="md:size-5" />
+              <span className="text-xs md:text-sm">{item.label}</span>
             </button>
           );
         })}
       </nav>
 
       {/* Logout Button */}
-      <div className="p-4 border-t border-slate-800">
+      <div className="p-3 md:p-4 border-t border-slate-800">
         <Button
           onClick={handleLogout}
-          className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 rounded-xl font-semibold transition-all duration-200"
+          className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white border-0 rounded-lg md:rounded-xl font-semibold transition-all duration-200 text-xs md:text-sm py-2 md:py-2.5"
         >
-          <LogOut size={18} className="mr-2" />
+          <LogOut size={16} className="md:size-5 mr-1 md:mr-2" />
           Sair
         </Button>
       </div>
